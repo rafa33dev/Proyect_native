@@ -1,25 +1,26 @@
-import {View, Text} from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useContext} from 'react';
-import HomeScreen from './Screens/HomeScreen';
-import SignInScreen from './Screens/SignInScreen';
+import React, {useContext} from 'react'
+import {SessionUserContext} from './Context/SessionUserContext'
+import {AccessGroup, AuthGroup} from './Screens/Routes'
+import {useGroupsNavigator} from './Hooks/useGroupsNavigator'
 
 const GroupNavigator = () => {
-  const Stack = createNativeStackNavigator();
-
+  const {groupNavigator, Stack} = useGroupsNavigator()
+  const {userSession} = useContext(SessionUserContext)
 
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: false,
-    }}
-    initialRouteName='SignIn'
-    >
-      <Stack.Group>
-        <Stack.Screen name='Home' component={ HomeScreen }/>
-        <Stack.Screen name='SignIn' component={ SignInScreen }/>
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      {!userSession?.id && (
+        <Stack.Group>{groupNavigator(Stack, AuthGroup)}</Stack.Group>
+      )}
 
-export default GroupNavigator;
+      {userSession?.id && (
+        <Stack.Group>{groupNavigator(Stack, AccessGroup)}</Stack.Group>
+      )}
+    </Stack.Navigator>
+  )
+}
+
+export default GroupNavigator

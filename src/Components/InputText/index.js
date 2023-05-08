@@ -1,8 +1,14 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-import React from 'react';
-import {Controller} from 'react-hook-form';
+import {View, Text, TextInput, StyleSheet} from 'react-native'
+import React from 'react'
+import {Controller} from 'react-hook-form'
 
-const CustomInput = ({control, name, rules, placeholder, secureTextEntry }) => {
+export const InputText = ({
+  control,
+  name,
+  rules,
+  placeholder,
+  secureTextEntry,
+}) => {
   return (
     <View style={{width: '100%'}}>
       <Controller
@@ -26,7 +32,15 @@ const CustomInput = ({control, name, rules, placeholder, secureTextEntry }) => {
               />
             </View>
             {error && (
-              <Text style={{color: 'red', alignSelf: 'stretch'}}>
+              <Text
+                style={{
+                  color: '#fff',
+                  alignSelf: 'stretch',
+                  fontSize: 18,
+                  backgroundColor: 'rgba(255, 85, 0, 0.63)',
+                  padding: 10,
+                  marginBottom: 15,
+                }}>
                 {error.message || 'Error'}
               </Text>
             )}
@@ -54,5 +68,3 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-
-export default CustomInput;

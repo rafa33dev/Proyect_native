@@ -1,7 +1,7 @@
-import {View, Text, Pressable, StyleSheet} from 'react-native';
-import React from 'react';
+import {View, Text, Pressable, StyleSheet} from 'react-native'
+import React from 'react'
 
-const CustomButton = ({ onPress, text, type = 'PRIMARY', bgColor, fgColor }) => {
+export const ButtonPrimary = ({ onPress, text, type = 'PRIMARY', bgColor, fgColor }) => {
   return (
     <Pressable 
       onPress={onPress}
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default CustomButton;
+
