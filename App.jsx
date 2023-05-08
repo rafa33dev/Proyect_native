@@ -8,12 +8,21 @@ import React, {useState} from 'react'
 import {SessionUserContextProvider} from './src/Context/SessionUserContext'
 import {NativeBaseProvider} from 'native-base'
 import {ThemeContext} from './src/Context/Theme-context'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBell } from '@fortawesome/free-regular-svg-icons';
+
+
+
+library.add(faBell)
+
+
 const client = new ApolloClient({
-  uri: 'http://10.2.20.119:4001/graphql',
+  uri: 'http://10.2.20.119:4000/graphql',
   cache: new InMemoryCache(),
 });
 
 const App = () => {
+
   const [theme, setTheme] = useState('light')
 
   const toggleTheme = () => {
@@ -29,7 +38,7 @@ const App = () => {
             <ApplicationProvider {...eva} theme={eva[theme]}>
               <IconRegistry icons={EvaIconsPack} />
               <SessionUserContextProvider>
-                <NativeBaseProvider>
+                <NativeBaseProvider>  
                   <GroupNavigator />
                 </NativeBaseProvider>
               </SessionUserContextProvider>
@@ -42,3 +51,4 @@ const App = () => {
 }
 
 export default App
+

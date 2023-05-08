@@ -1,5 +1,6 @@
 import HomeScreen from '../Screens/HomeScreen'
-import ConfirmEmailScreen from './ConfirmEmailScreen'
+import ConfirmEmailScreen from './ConfirmEmailScreen';
+import HomeUserScreen from './HomeUserScreen';
 import ProfileScreen from './ProfileScreen'
 import SignInScreen from './SignInScreen'
 import SignUpScreen from './SignUpScreen'
@@ -35,5 +36,11 @@ export const AccessGroup = {
     name: 'Profile',
     title: 'Profile',
     component: ProfileScreen,
+  },
+
+  'homeUser': {
+    name: 'HomeUser',
+    title: 'HomeUser',
+    component: HomeUserScreen,
   },
 };

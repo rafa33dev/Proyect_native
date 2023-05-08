@@ -16,12 +16,13 @@ import {SessionUserContext} from '../../Context/SessionUserContext';
 import {Icon} from '@ui-kitten/components'
 
 const SignInScreen = () => {
-  const navigation = useNavigation();
-  const [userData, setUserData] = useState({});
-  const [dataErrors, setDataErrors] = useState('');
-  const {loading, error, data} = useSignInScreen(userData); 
-  const {userSession, setUserSession} = useContext(SessionUserContext);
-
+  const navigation = useNavigation()
+  const [userData, setUserData] = useState({})
+  const [dataErrors, setDataErrors] = useState('')
+  const {loading, error, data} = useSignInScreen(userData)
+  const {userSession, setUserSession} = useContext(SessionUserContext)
+  
+  
   const {
     control,
     handleSubmit,
@@ -31,16 +32,16 @@ const SignInScreen = () => {
   useEffect(() => {
     if (data) {
       if (data.userLogin) {
-        setUserSession(data.userLogin);
+        setUserSession(data.userLogin)       
       } else {
-        setDataErrors('wrong email or password');
+        setDataErrors('wrong email or password')
       }
     }
   }, [data]);
 
   useEffect(() => {
-    console.log('SESS---->>', userSession);
-  }, [userSession]);
+    console.log('SESS---->>', userSession)
+  }, [userSession])
 
   const onCreateAccount = () => {
     navigation.navigate('SignUp');
@@ -48,7 +49,8 @@ const SignInScreen = () => {
 
   const onPressableHome = () => {
     setUserSession({});
-    navigation.navigate('home');
+   navigation.navigate('home');
+  
   };
 
   return (
@@ -60,7 +62,6 @@ const SignInScreen = () => {
         <Text style={styles.title}>Organize your tasks!</Text>
         <Pressable onPress={() => navigation.navigate('home')} style= {styles.containerIcons}>
           <Icon
-            onPress= {() => navigation.navigate('home')}
             name="log-in-outline"
             fill="rgb(226, 135, 67)"
             style={styles.icon}
@@ -72,7 +73,6 @@ const SignInScreen = () => {
             placeholder="Email"
             control={control}
             secureTextEntryxz
-            
             rules={{required: 'email is required'}}
           />
 
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
 
   containerIcons: {
     top: 150,
-    zIndex: 1
+    zIndex:1
   },
 
   icon: {
