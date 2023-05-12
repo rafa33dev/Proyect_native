@@ -1,7 +1,8 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {SessionUserContext} from './Context/SessionUserContext'
 import {AccessGroup, AuthGroup} from './Screens/Routes'
 import {useGroupsNavigator} from './Hooks/useGroupsNavigator'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const GroupNavigator = () => {
   const {groupNavigator, Stack} = useGroupsNavigator();
@@ -12,11 +13,11 @@ const GroupNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {!userSession?.id && (
+      {!userSession && (
         <Stack.Group>{groupNavigator(Stack, AuthGroup)}</Stack.Group>
       )}
 
-      {userSession?.id && (
+      {userSession && (
         <Stack.Group>{groupNavigator(Stack, AccessGroup)}</Stack.Group>
       )}
     </Stack.Navigator>

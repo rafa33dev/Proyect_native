@@ -14,6 +14,11 @@ import {useNavigation} from '@react-navigation/native';
 import {useSignInScreen} from '../../Hooks/useSignInScreen';
 import {SessionUserContext} from '../../Context/SessionUserContext';
 import {Icon} from '@ui-kitten/components'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import {AccessGroup, AuthGroup} from './Screens/Routes'
+
+
+
 
 const SignInScreen = () => {
   const navigation = useNavigation()
@@ -22,7 +27,7 @@ const SignInScreen = () => {
   const {loading, error, data} = useSignInScreen(userData)
   const {userSession, setUserSession} = useContext(SessionUserContext)
   
-  
+
   const {
     control,
     handleSubmit,
@@ -32,16 +37,17 @@ const SignInScreen = () => {
   useEffect(() => {
     if (data) {
       if (data.userLogin) {
-        setUserSession(data.userLogin)       
+        AsyncStorage.setItem('isLoggedIn', JSON.stringify(data.userLogin))
+        setUserSession(data.userLogin)
       } else {
         setDataErrors('wrong email or password')
       }
     }
   }, [data]);
 
-  useEffect(() => {
-    console.log('SESS---->>', userSession)
-  }, [userSession])
+  // useEffect(() => {
+  //   console.log('SESS---->>', userSession)
+  // }, [userSession])
 
   const onCreateAccount = () => {
     navigation.navigate('SignUp');
